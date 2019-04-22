@@ -1,0 +1,96 @@
+﻿@model POS.Models.ViewModel.ExpenseCategoryVM
+@{
+    ViewBag.Title = "Add Expense Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<span class="text-success">@TempData["success"]</span>
+<span class="text-danger">@TempData["exception"]</span> 
+<div class="addForm col-lg-10">
+        <form action="/ExpenseCategory/Add" method="post" enctype="multipart/form-data" id="ExpenseCategoryForm">
+            <div class="form-check form-check-inline" id="rootRadio">
+                @Html.RadioButton("CategoryType", "root", new { @class = "form-check-input" })
+                @Html.Label("CategoryType", "Root Category", new { @class = "form-check-label" })
+            </div>
+            <div class="form-check form-check-inline" id="childRadio">
+                @Html.RadioButton("CategoryType", "child", new { @class = "form-check-input", @id = "child" })
+                @Html.Label("child", "Child Category", new { @class = "form-check-label" })
+            </div>
+            <div class="form-group" id="ParentCat">
+                @Html.LabelFor(m => m.ParentId, "Parent Name", new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.ParentId, null, new { @class = "form-control" })
+            </div>
+            <div class="form-group row" id="name">
+                @Html.LabelFor(m => m.Name, null, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group row" id="code">
+                @Html.LabelFor(m => m.Code, null, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Code, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Code, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Description, null, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Description, null, new { @class = "form-control" })
+            </div>
+            @*Hidden input fiedls for update validation*@
+            <input type="hidden" name="Id" id="Id" hidden />
+            <input type="hidden" name="PrevName" id="PrevName" hidden />
+            <input type="hidden" name="PrevCode" id="PrevCode" hidden />
+            <input class="btn btn-primary" id="addBtn" type="submit" value="Save" />
+        </form>
+</div>
+
+<div class="DataTable">
+    <table class="table table-bordered table-hover table-striped table-condensed">
+        <thead class="text-center" style="background-color: green; color: white; font-weight: bold">
+        <tr style="background-color: darkgreen;">
+            <td colspan="6" style="padding: 15px; font-size: 15px">List of All Expense Category</td>
+        </tr>
+        <tr>
+            <td class="col-lg-1">S/N</td>
+            <td class="col-lg-1">Name</td>
+            <td class="col-lg-1">Parent Name</td>
+            <td class="col-lg-1">Code</td>
+            <td class="col-lg-2">Description</td>
+            <td class="col-lg-1">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        @{int i = 1; }
+        @foreach (var cat in Model.All)
+        {
+            string parentName = "";
+            foreach (var categories in Model.All)
+            {
+                if (cat.ParentId == categories.Id)
+                {
+                    parentName = categories.Name;
+                    break;
+                }
+            }
+            <tr>
+                <td>@i</td>
+                <td>@cat.Name</td>
+                <td>@parentName</td>
+                <td>@cat.Code</td>
+                <td>@cat.Description</td>
+                <td>
+                    <button class="btn btn-primary editBtn" value="@cat.Id"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp&nbsp
+                    <button class="btn btn-danger deleteBtn" value="@cat.Id"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+            i++;
+        }
+        </tbody>
+        <tfoot class="text-center">
+        <tr>
+            <td colspan="7" style="background-color: gray; color:white" colspan="7">End</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Custom/ExpenseCategory.js"></script>
+}

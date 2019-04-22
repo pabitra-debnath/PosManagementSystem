@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1BC569D-40A9-4407-85BE-C0A820768084}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POS.Models</RootNamespace>
+    <AssemblyName>POS.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\..\PosManagementSystem\PosWebApp\bin\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PosManagementSystem\PosWebApp\bin\roslyn\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Composition.registration" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\PosManagementSystem\PosWebApp\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\..\PosManagementSystem\PosWebApp\bin\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\..\..\PosManagementSystem\PosWebApp\bin\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Operation\ExpenseOperation.cs" />
+    <Compile Include="Operation\ExpenseOperationInfo.cs" />
+    <Compile Include="Operation\Inventory.cs" />
+    <Compile Include="Operation\PurchaseOperation.cs" />
+    <Compile Include="Operation\PurchaseOperationInfo.cs" />
+    <Compile Include="Operation\SalesOperation.cs" />
+    <Compile Include="Operation\SalesOperationInfo.cs" />
+    <Compile Include="Operation\Stock.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setup\Branch.cs" />
+    <Compile Include="Setup\Employee.cs" />
+    <Compile Include="Setup\ExpenseCategory.cs" />
+    <Compile Include="Setup\ExpenseItem.cs" />
+    <Compile Include="Setup\Item.cs" />
+    <Compile Include="Setup\ItemCategory.cs" />
+    <Compile Include="Setup\Organization.cs" />
+    <Compile Include="Setup\Party.cs" />
+    <Compile Include="ViewModel\BranchVM.cs" />
+    <Compile Include="ViewModel\EmployeeVM.cs" />
+    <Compile Include="ViewModel\ExpenseCategoryVM.cs" />
+    <Compile Include="ViewModel\ExpenseItemVM.cs" />
+    <Compile Include="ViewModel\ExpenseOperationInfoVM.cs" />
+    <Compile Include="ViewModel\ExpenseOperationVM.cs" />
+    <Compile Include="ViewModel\IncomeReportVM.cs" />
+    <Compile Include="ViewModel\ItemCategoryVM.cs" />
+    <Compile Include="ViewModel\ItemVM.cs" />
+    <Compile Include="ViewModel\OrganizationVM.cs" />
+    <Compile Include="ViewModel\PartyVM.cs" />
+    <Compile Include="ViewModel\PurchaseOperationInfoVM.cs" />
+    <Compile Include="ViewModel\PurchaseOperationVM.cs" />
+    <Compile Include="ViewModel\PurchaseVM.cs" />
+    <Compile Include="ViewModel\SalesOperationInfoVM.cs" />
+    <Compile Include="ViewModel\SalesOperationVM.cs" />
+    <Compile Include="ViewModel\StockReportVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Report\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

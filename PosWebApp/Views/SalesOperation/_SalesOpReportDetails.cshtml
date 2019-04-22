@@ -1,0 +1,113 @@
+﻿@model POS.Models.Operation.SalesOperationInfo
+
+@{
+    ViewBag.Title = "Report Details";
+}
+<div id="pdfFile">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <tr class="info" style="text-align: center">
+                    <td colspan="2"><h3>Sales Information</h3></td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Sales No : ")</td>
+                    <td>@Html.DisplayFor(model => model.SalesNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Branch : ")</td>
+                    <td>@Html.DisplayFor(model => model.Branch.Address)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Sold By : ")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Sales Date : ")</td>
+                    <td>@Html.DisplayFor(model => model.SalesDate)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Customer Name : ")</td>
+                    <td>@Html.DisplayFor(model => model.CustomerName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Customer Contact : ")</td>
+                    <td>@Html.DisplayFor(model => model.CustomerContact)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <table class="table table-bordered">
+
+                <thead>
+                    <tr style="background: darkcyan; color: #fff;">
+                        <th>@Html.Label("SL")</th>
+                        <th>@Html.Label("Item")</th>
+                        <th>@Html.Label("Qty")</th>
+                        <th>@Html.Label("price")</th>
+                        <th>@Html.Label("Line Total")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int sl = 0; }
+                    @foreach (var item in Model.SalesItems)
+            {
+                sl++;
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => sl)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LineTotal)</td>
+                        </tr>
+                    }
+                    <tr style="border: 0; background: #eee; color: #000;">
+                        <td colspan="4">@Html.Label("Total Amount")</td>
+                        <td>@Html.DisplayFor(model => model.TotalAmount)</td>
+                    </tr>
+
+                    <tr style="border: 0; background: #eee; color: #000;">
+                        <td colspan="4">@Html.Label("Discount Amount")</td>
+                        <td>@Html.DisplayFor(model => model.DiscountAmount)</td>
+                    </tr>
+                    @{
+                        double subTotalAmount = (double)(Model.TotalAmount - Model.DiscountAmount);
+                        double vatAmount = (double)(subTotalAmount * (Model.VAT / 100));
+                    }
+                    <tr style="border: 0; background: #eee; color: #000;">
+                        <td colspan="4">@Html.Label("Sub Total Amount")</td>
+                        <td>@Html.DisplayFor(model => @subTotalAmount)</td>
+                    </tr>
+
+                    <tr style="border: 0; background: #eee; color: #000;">
+                        <td colspan="4">@Html.Label("VAT (" + @Model.VAT + "%)")</td>
+                        <td>@Html.DisplayFor(model => @vatAmount)</td>
+                    </tr>
+
+                    <tr style="border: 0; background: grey; color: #fff;">
+                        <td colspan="4">@Html.Label("Payable Amount")</td>
+                        <td>@Html.DisplayFor(model => model.PayableAmount)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-9 col-md-3">
+        @Html.Hidden("Hidden",@Model.SalesNo,new {@id="hiddenSalesNo"})
+    </div>
+</div>
+
+
+@section scripts
+{
+<script src="~/Scripts/jspdf.min.js"></script>
+<script src="~/Scripts/Custom/PdfGernartor.js"></script>
+    <script src="~/Scripts/Custom/SalesOperation.js"></script>
+    <script>
+        
+    </script>
+
+}

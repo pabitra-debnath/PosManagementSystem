@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - POS Management System</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    @RenderSection("style", false);
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+</head>
+<body>
+<div class="main">
+    <div class="sidebar col-lg-3">
+        <div class="sidebar-title">
+            <h2>POS Management</h2>
+        </div>
+        <img id="proPic" src="~/images/proPic.png" />
+        <div class="user-name">
+            <h3>The Sharp Coder</h3>
+            <p>offline</p>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search" />
+        </div>
+        <div class="nav">
+            <ul>
+                <li class="Menu"><a href="/Home/Index">Home<span style="float: right; margin:3px;" class="glyphicon glyphicon-home"></span></a></li>
+                <li class="SetupMenu Menu"><a href="#">Setup <span style="float: right; margin:3px;" class="glyphicon glyphicon-chevron-down glyphicon-resize-small"></span></a>
+                    <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/ItemCategory/Add">Item Category</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/ExpenseCategory/Add">Expense Category</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/Item/Index">Item</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/ExpenseItem/Index">Expense Item</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/Organization/Add">Organization</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/Branch/Index">Branch</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/Party/Index">Party</a></li>
+                <li class="SetupSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/Employee/All">Employee</a></li>
+                </li>
+                <li class="OperationMenu Menu"><a href="#">Operation<span style="float: right; margin:3px;" class="glyphicon glyphicon-chevron-down glyphicon-resize-small"></span></a>
+                    <li class="OperationSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/PurchaseOperation/Index">Purchase</a></li>
+                    <li class="OperationSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/ExpenseOperation/Index">Expense</a></li>
+                    <li class="OperationSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/SalesOperation/Index">Sale</a></li>
+                </li>
+                <li class="ReportMenu Menu"><a href="#">Report<span style="float: right; margin:3px;" class="glyphicon glyphicon-chevron-down glyphicon-resize-small"></span></a>
+                <li class="ReportSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/PurchaseOperation/Report">Purchase Report</a></li>
+                <li class="ReportSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/ExpenseOperation/Report">Expense Report</a></li>
+                <li class="ReportSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/SalesOperation/Report">Sale Report</a></li>
+                <li class="ReportSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/IncomeReport/Index">Income Report</a></li>
+                <li class="ReportSubMenu subMenu"><i class="glyphicon glyphicon-menu-right"></i>&nbsp<a href="/StockReport/Index">Stock Report</a></li>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content col-lg-8">
+        <div class="content-header">
+            <div class="news">
+                <img src="~/images/menu.png" />
+                <p>@ViewBag.Title</p>
+            </div>
+            <div class="icon">
+                <img src="~/images/notification.png" />
+                <img src="~/images/msg.png" />
+                <img src="~/images/setting.png" />
+            </div>
+        </div>
+        <div class="content-title">
+            <div class="content-title-left">
+                <img src="~/images/home.png" />
+                <div class="content-title-text">
+                    <h1>DASHBOARD</h1>
+                    <h4>HOME/DASHBOARD</h4>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-body">
+            <!--All page will show in here-->
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <div class="footer"><p>Copyright &copy mdAshiqShopon</p></div>
+</div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@RenderSection("scripts", false);
+
+<script>
+    $(document).ready(function() {
+        $('.SetupSubMenu').hide();
+        $('.OperationSubMenu').hide();
+        $('.ReportSubMenu').hide();
+
+        $('.SetupMenu').click(function() {
+            $('.SetupSubMenu').toggle(250);
+        });
+
+        $('.OperationMenu').click(function () {
+            $('.OperationSubMenu').toggle(250);
+        });
+
+        $('.ReportMenu').click(function () {
+            $('.ReportSubMenu').toggle(250);
+        });
+    })
+</script>
+</body>
+</html>

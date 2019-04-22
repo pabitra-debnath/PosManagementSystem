@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7F66608-F728-4F17-BCD7-FDE55EBBBC03}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>POS.DAL</RootNamespace>
+    <AssemblyName>POS.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PosWebApp\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\201805241810128_InitialCreate.cs" />
+    <Compile Include="Migrations\201805241810128_InitialCreate.Designer.cs">
+      <DependentUpon>201805241810128_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805261800326_Validatio_added_to_itemCategory.cs" />
+    <Compile Include="Migrations\201805261800326_Validatio_added_to_itemCategory.Designer.cs">
+      <DependentUpon>201805261800326_Validatio_added_to_itemCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271609445_Validation_Remove.cs" />
+    <Compile Include="Migrations\201805271609445_Validation_Remove.Designer.cs">
+      <DependentUpon>201805271609445_Validation_Remove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805282021288_Organization_Model_added.cs" />
+    <Compile Include="Migrations\201805282021288_Organization_Model_added.Designer.cs">
+      <DependentUpon>201805282021288_Organization_Model_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806011815128_Employeee_model_added.cs" />
+    <Compile Include="Migrations\201806011815128_Employeee_model_added.Designer.cs">
+      <DependentUpon>201806011815128_Employeee_model_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806020728378_Modified_JoiningDate.cs" />
+    <Compile Include="Migrations\201806020728378_Modified_JoiningDate.Designer.cs">
+      <DependentUpon>201806020728378_Modified_JoiningDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806020930138_Employee_JoiningDate_Type_Modified.cs" />
+    <Compile Include="Migrations\201806020930138_Employee_JoiningDate_Type_Modified.Designer.cs">
+      <DependentUpon>201806020930138_Employee_JoiningDate_Type_Modified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806021821514_Purchase_and_Inventory_model_added.cs" />
+    <Compile Include="Migrations\201806021821514_Purchase_and_Inventory_model_added.Designer.cs">
+      <DependentUpon>201806021821514_Purchase_and_Inventory_model_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806022044552_Organization_added_to_Purchase_Model.cs" />
+    <Compile Include="Migrations\201806022044552_Organization_added_to_Purchase_Model.Designer.cs">
+      <DependentUpon>201806022044552_Organization_added_to_Purchase_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806031831127_Item_Model_Added.cs" />
+    <Compile Include="Migrations\201806031831127_Item_Model_Added.Designer.cs">
+      <DependentUpon>201806031831127_Item_Model_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806032040314_Add_ExpenseItem_Branch_Party_Model.cs" />
+    <Compile Include="Migrations\201806032040314_Add_ExpenseItem_Branch_Party_Model.Designer.cs">
+      <DependentUpon>201806032040314_Add_ExpenseItem_Branch_Party_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806040621282_ForeignKey_added_To_Employee.cs" />
+    <Compile Include="Migrations\201806040621282_ForeignKey_added_To_Employee.Designer.cs">
+      <DependentUpon>201806040621282_ForeignKey_added_To_Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806040622200_ForeignKey_added_To_Employee1.cs" />
+    <Compile Include="Migrations\201806040622200_ForeignKey_added_To_Employee1.Designer.cs">
+      <DependentUpon>201806040622200_ForeignKey_added_To_Employee1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806040710122_Branch_ForeignKey_Added.cs" />
+    <Compile Include="Migrations\201806040710122_Branch_ForeignKey_Added.Designer.cs">
+      <DependentUpon>201806040710122_Branch_ForeignKey_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806042003328_Purchase_model_modified.cs" />
+    <Compile Include="Migrations\201806042003328_Purchase_model_modified.Designer.cs">
+      <DependentUpon>201806042003328_Purchase_model_modified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806042212355_Total_Price_added_to_purchaseDetailes.cs" />
+    <Compile Include="Migrations\201806042212355_Total_Price_added_to_purchaseDetailes.Designer.cs">
+      <DependentUpon>201806042212355_Total_Price_added_to_purchaseDetailes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806051531410_Expense_Operation_Added.cs" />
+    <Compile Include="Migrations\201806051531410_Expense_Operation_Added.Designer.cs">
+      <DependentUpon>201806051531410_Expense_Operation_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806051929136_Purchase_OperationAdded_Pabitra.cs" />
+    <Compile Include="Migrations\201806051929136_Purchase_OperationAdded_Pabitra.Designer.cs">
+      <DependentUpon>201806051929136_Purchase_OperationAdded_Pabitra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806052109478_Sales_Operation_Added.cs" />
+    <Compile Include="Migrations\201806052109478_Sales_Operation_Added.Designer.cs">
+      <DependentUpon>201806052109478_Sales_Operation_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Operation\ExpOperationGetway.cs" />
+    <Compile Include="Operation\PurchaseGetway.cs" />
+    <Compile Include="Operation\SalesGetway.cs" />
+    <Compile Include="PosDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\IncomeReportGetway.cs" />
+    <Compile Include="Report\StockReportGetway.cs" />
+    <Compile Include="Setup\BranchGetway.cs" />
+    <Compile Include="Setup\EmployeeGetway.cs" />
+    <Compile Include="Setup\ExpenseCategoryGetway.cs" />
+    <Compile Include="Setup\ExpenseItemGetway.cs" />
+    <Compile Include="Setup\ItemCategoryGetway.cs" />
+    <Compile Include="Setup\ItemGetway.cs" />
+    <Compile Include="Setup\OrganizationGetway.cs" />
+    <Compile Include="Setup\PartyGetway.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\POS.Models\POS.Models.csproj">
+      <Project>{c1bc569d-40a9-4407-85be-c0a820768084}</Project>
+      <Name>POS.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805241810128_InitialCreate.resx">
+      <DependentUpon>201805241810128_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261800326_Validatio_added_to_itemCategory.resx">
+      <DependentUpon>201805261800326_Validatio_added_to_itemCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271609445_Validation_Remove.resx">
+      <DependentUpon>201805271609445_Validation_Remove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805282021288_Organization_Model_added.resx">
+      <DependentUpon>201805282021288_Organization_Model_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806011815128_Employeee_model_added.resx">
+      <DependentUpon>201806011815128_Employeee_model_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806020728378_Modified_JoiningDate.resx">
+      <DependentUpon>201806020728378_Modified_JoiningDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806020930138_Employee_JoiningDate_Type_Modified.resx">
+      <DependentUpon>201806020930138_Employee_JoiningDate_Type_Modified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806021821514_Purchase_and_Inventory_model_added.resx">
+      <DependentUpon>201806021821514_Purchase_and_Inventory_model_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806022044552_Organization_added_to_Purchase_Model.resx">
+      <DependentUpon>201806022044552_Organization_added_to_Purchase_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806031831127_Item_Model_Added.resx">
+      <DependentUpon>201806031831127_Item_Model_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806032040314_Add_ExpenseItem_Branch_Party_Model.resx">
+      <DependentUpon>201806032040314_Add_ExpenseItem_Branch_Party_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806040621282_ForeignKey_added_To_Employee.resx">
+      <DependentUpon>201806040621282_ForeignKey_added_To_Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806040622200_ForeignKey_added_To_Employee1.resx">
+      <DependentUpon>201806040622200_ForeignKey_added_To_Employee1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806040710122_Branch_ForeignKey_Added.resx">
+      <DependentUpon>201806040710122_Branch_ForeignKey_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806042003328_Purchase_model_modified.resx">
+      <DependentUpon>201806042003328_Purchase_model_modified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806042212355_Total_Price_added_to_purchaseDetailes.resx">
+      <DependentUpon>201806042212355_Total_Price_added_to_purchaseDetailes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051531410_Expense_Operation_Added.resx">
+      <DependentUpon>201806051531410_Expense_Operation_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051929136_Purchase_OperationAdded_Pabitra.resx">
+      <DependentUpon>201806051929136_Purchase_OperationAdded_Pabitra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806052109478_Sales_Operation_Added.resx">
+      <DependentUpon>201806052109478_Sales_Operation_Added.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

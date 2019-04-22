@@ -1,0 +1,78 @@
+﻿@model POS.Models.Operation.ExpenseOperationInfo
+
+<div id="pdfFile">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <tr class="info" style="text-align: center">
+                    <td colspan="2"><h3>Expense Information</h3></td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Expense No : ")</td>
+                    <td>@Html.DisplayFor(model => model.ExpenseNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Branch : ")</td>
+                    <td>@Html.DisplayFor(model => model.Branch.Address)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Employee : ")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Date : ")</td>
+                    <td>@Html.DisplayFor(model => model.ExpenseDate)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <table class="table table-bordered table-striped">
+
+                <thead>
+                    <tr style="background: darkcyan; color: #fff;">
+                        <th>@Html.Label("SL")</th>
+                        <th>@Html.Label("Item")</th>
+                        <th>@Html.Label("Reason")</th>
+                        <th>@Html.Label("Qty")</th>
+                        <th>@Html.Label("Amount")</th>
+                        <th>@Html.Label("Line Total")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int sl = 0; }
+                    @foreach (var item in Model.ExpenseItems)
+            {
+                sl++;
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => sl)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Reason)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LineTotal)</td>
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr style="border: 0; background: grey; color: #fff;">
+                        <td colspan="5">@Html.Label("Total Amount")</td>
+                        <td>@Html.DisplayFor(model => model.TotalAmount)</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-9 col-md-3">
+        @Html.Hidden("Hidden", @Model.ExpenseNo, new { @id = "hiddenExpenseNo" })
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jspdf.min.js"></script>
+    <script src="~/Scripts/Custom/ExpenseOperation.js"></script>
+}

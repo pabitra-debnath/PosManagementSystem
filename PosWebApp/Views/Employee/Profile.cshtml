@@ -1,0 +1,100 @@
+﻿@using System.Web.Script.Services
+@model POS.Models.ViewModel.EmployeeVM
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile</h2>
+    <h4>Employee Profile</h4>
+    <hr />
+    <div class="proImg">
+        <img src="~/images/@Html.DisplayFor(model => model.ImagePath)" height="150" width="150" /><br/>
+        <div class="name">@Html.DisplayFor(model => model.Name)</div>
+        <div class="email">@Html.DisplayFor(model => model.Email)</div>
+        <div class="contact">@Html.DisplayFor(model => model.ContactNo)</div>
+         @Html.ActionLink("Edit", "Edit", new { employeeId = Model.Id }, new { @class = "btn btn-primary" })
+         <button class="btn btn-danger deleteBtn" value="@Model.Id">Remove</button>
+    </div><br/>
+    <table class="table table-bordered table-striped table-responsive">
+        <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Code)</td>
+            <td>@Html.DisplayFor(model => model.Code)</td>
+        </tr>
+        <tr>
+            <td>Organization</td>
+            <td>@Html.DisplayFor(model => model.Organizations.Name)</td>
+        </tr>
+        <tr>
+            @{
+                string branchAddress="";
+                foreach (var branch in Model.BranchList)
+                {
+                    if (Model.BranchId == branch.Id)
+                    {
+                        branchAddress = branch.Address;
+                        break;
+                    }
+                }
+            }
+            <td>Branch</td>
+            <td>@branchAddress</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.JoiningDate)</td>
+            <td>@Html.DisplayFor(model => model.JoiningDate)</td>
+        </tr>
+        <tr>
+            @{
+                string ReferName = "---";
+                foreach (var emp in Model.Employees)
+                {
+                    if (Model.ReferenceId == emp.Id)
+                    {
+                        ReferName = emp.Name;
+                        break;
+                    }
+                }
+            }
+            <td>Reference</td>
+            <td>@ReferName</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.EmergencyContact)</td>
+            <td>@Html.DisplayFor(model => model.EmergencyContact)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.NID)</td>
+            <td>@Html.DisplayFor(model => model.NID)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.FathersName)</td>
+            <td>@Html.DisplayFor(model => model.FathersName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.MothersName)</td>
+            <td>@Html.DisplayFor(model => model.MothersName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.PresentAddress)</td>
+            <td>@Html.DisplayFor(model => model.PresentAddress)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.PermanentAddress)</td>
+            <td>@Html.DisplayFor(model => model.PermanentAddress)</td>
+        </tr>
+        </tbody>
+    </table>
+
+<p>
+    @Html.ActionLink("Back to List", "All")
+</p>
+
+@section style{
+    <link href="~/Content/profile.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/Custom/Employee.js"></script>
+}

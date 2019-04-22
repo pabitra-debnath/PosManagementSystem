@@ -1,0 +1,124 @@
+﻿@model POS.Models.ViewModel.OrganizationVM
+
+@{
+    ViewBag.Title = "Add Organization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<span class="text-success">@TempData["success"]</span>
+<span class="text-danger">@TempData["exception"]</span>
+<h2>Add</h2>
+
+    <form action="/Organization/Add" method="post" enctype="multipart/form-data" id="OrganizationForm">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Organization</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="customFile">Choose file</label>
+                <div class="col-md-8">
+                    <input type="file" name="ImageFile" class="custom-file-input" id="ImageFile">
+                    <br/>
+                    <img src="" alt="" id="ImagePreview" class="img-responsive" width="150" height="150" />
+                </div>
+            </div>
+            @* Hidden field for update validation *@
+            <input type="hidden" id="Id" name="Id" hidden />
+            <input type="hidden" id="PrevName" name="PrevName" hidden />
+            <input type="hidden" id="PrevCode" name="PrevCode" hidden />
+            <input type="hidden" id="PrevContactNo" name="PrevContactNo" hidden />
+            <input type="hidden" id="ImagePath" name="ImagePath" hidden />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Save" class="btn btn-primary addBtn" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+<div class="DataTable">
+    <table class="table table-bordered table-hover table-striped table-responsive">
+        <thead class="text-center" style="background: darkgreen; color: #fff; font-weight: bold">
+        <tr>
+            <td colspan="7" style="padding: 15px; font-size: 15px">List of All Organization</td>
+        </tr>
+        <tr style="background: green">
+            <td class="col-lg-1">S/N</td>
+            <td class="col-lg-1">Name</td>
+            <td class="col-lg-1">Code</td>
+            <td class="col-lg-2">Contact No</td>
+            <td class="col-lg-2">Address</td>
+            <td class="col-lg-1">Image</td>
+            <td class="col-lg-1">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        @{int i = 1; }
+        @foreach (var org in Model.Organizations)
+        {
+            if (org.ImagePath == null)
+            {
+                org.ImagePath = "NoImage.jpg";
+            }
+            <tr>
+                <td>@i</td>
+                <td>@org.Name</td>
+                <td>@org.Code</td>
+                <td>@org.ContactNo</td>
+                <td>@org.Address</td>
+
+                <td><img width="50" height="50" src="~/images/@org.ImagePath" /></td>
+                <td>
+                    <button class="btn btn-primary editBtn" value="@org.Id"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp&nbsp
+                    <button class="btn btn-danger deleteBtn" value="@org.Id"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+            i++;
+        }
+        </tbody>
+        <tfoot class="text-center" style="background: darkgray; color: #fff;">
+        <tr>
+            <td colspan="7">End</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Custom/Organization.js"></script>
+    <script src="~/Scripts/Custom/Image.js"></script>
+}

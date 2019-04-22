@@ -1,0 +1,74 @@
+﻿@model List<POS.Models.Setup.Employee>
+
+@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All</h2>
+
+
+    @Html.ActionLink("Add New", "Add",null, new {@class="btn btn-primary"})
+<br/><br/>
+<table class="table">
+    <tr>
+        <th>
+            SL
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Organization
+        </th>
+        <th>
+            Branch
+        </th>
+        <th>
+            Contact No
+        </th>
+        <th>
+            Image
+        </th>
+    </tr>
+    @{ int sl = 0;}
+    @foreach (var item in Model)
+    {
+        sl++;
+        if (item.ImagePath == null)
+        {
+            item.ImagePath = "NoImage.jpg";
+        }
+        <tr>
+            <td>
+                @sl
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organizations.Name)
+            </td>
+        
+            <td>
+                @Html.DisplayFor(modelItem => item.Branchs.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNo)
+            </td>
+            <td>
+                <img src="~/images/@item.ImagePath" height="50" width="50"/>
+            </td>
+            <td>
+                @Html.ActionLink("View Profile", "Profile", new { employeeId=item.Id }, new {@class="btn btn-info"})
+                <button class="btn btn-danger deleteBtn" value="@item.Id">Remove</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    
+<script src="~/Scripts/Custom/Employee.js"></script>
+}

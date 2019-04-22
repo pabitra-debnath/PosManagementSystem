@@ -1,0 +1,90 @@
+﻿@model POS.Models.Operation.PurchaseOperationInfo
+
+@{
+    ViewBag.Title = "Purchase Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="pdfFile">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <tr class="info" style="text-align: center">
+                    <td colspan="2"><h3>Purchase Information</h3></td>
+                </tr>
+                <tr>
+                    <td> @Html.Label("Purchase No : ")</td>
+                    <td>@Html.DisplayFor(model => model.PurchaseNo)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Branch : ")</td>
+                    <td>@Html.DisplayFor(model => model.Branch.Address)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Supplier : ")</td>
+                    <td>@Html.DisplayFor(model => model.Supplier.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Purchase By : ")</td>
+                    <td>@Html.DisplayFor(model => model.Employee.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Remarks : ")</td>
+                    <td>@Html.DisplayFor(model => model.Remarks)</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Purchase Date : ")</td>
+                    <td>@Html.DisplayFor(model => model.PurchaseDate)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-8">
+            <table class="table table-bordered table-striped">
+
+                <thead>
+                    <tr style="background: darkcyan; color: #fff;">
+                        <th>@Html.Label("SL")</th>
+                        <th>@Html.Label("Item")</th>
+                        <th>@Html.Label("Qty")</th>
+                        <th>@Html.Label("price")</th>
+                        <th>@Html.Label("Line Total")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int sl = 0; }
+                    @foreach (var item in Model.PurchaseItems)
+            {
+                sl++;
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => sl)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LineTotal)</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr style="border: 0; background: grey; color: #fff;">
+                        <td colspan="4">@Html.Label("Total Amount")</td>
+                        <td>@Html.DisplayFor(model => model.TotalAmount)</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-9 col-md-3">
+        @Html.Hidden("Hidden", @Model.PurchaseNo, new { @id = "hiddenPurchaseNo" })
+        <input type="button" value="Export To Pdf" class="btn btn-primary" onclick="getPdf()" />
+        <input type="button" value="Cancel" class="btn btn-default" id="redirectIndex" />
+    </div>
+</div>
+
+
+@section scripts
+{
+<script src="~/Scripts/jspdf.min.js"></script>
+<script src="~/Scripts/Custom/PurchaseOperation.js"></script>
+}

@@ -1,0 +1,180 @@
+﻿@model POS.Models.ViewModel.SalesOperationInfoVM
+
+@{
+    ViewBag.Title = "Sales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Sales Operation</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SalesNo)
+
+        <div class="row" style="background: powderblue; padding:8px;">
+            <div class="col-md-3">
+                @Html.Label("Item Name", new { @class = "control-label" })<br />
+                @Html.DropDownList("ItemName", Model.SelectListItem, new { @class = "form-control chosen-select", @id = "itemName" })
+            </div>
+            <div class="col-md-2">
+                @Html.Label("Quantity", new { @class = "control-label" })<br />
+                <input type="number" min="1" name="ItemQuantity" id="itemQuantity" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Unit Price", new { @class = "control-label" })<br />
+                <input type="number" min="0" step="100" name="ItemUnitPrice" id="itemUnitPrice" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                @Html.Label("Stock Quantity", new { @class = "control-label" })
+                @Html.TextBox("ItemStockQuantity", null, new { @class = "form-control", @id = "itemStockQuantity", @readonly = true })
+
+            </div>
+            <div class="col-md-2">
+                <br/>
+                <input type="button" class="btn btn-primary btn-sm" id="addSales" value="Add"/>
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">Item List</h3></div>
+                    <div class="panel-body">
+                        <br />
+                        <table class="table table-bordered" id="salesTable">
+                            <thead class="text-center">
+                            <tr style="background: skyblue;"><th>SL</th><th>Item</th><th>Quantity</th><th>Price</th><th>Line Total</th><th>Action</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">Sales Information</h3></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BranchId, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.BranchId, Model.SelectListBranch, new { @class = "form-control", @id = "branchId" })
+                            @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EmployeeId, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.EmployeeId, Model.SelectListEmployee, new { @class = "form-control", @id = "employeeId", @disabled = true })
+                            @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SalesDate, new {@class = "control-label"})
+                            @Html.TextBoxFor(model => model.SalesDate, "{0:MM/dd/yyyy}", new {@class = "form-control datepicker"})
+                            @Html.ValidationMessageFor(model => model.SalesDate, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CustomerName, new {@class = "control-label"})
+                            @Html.TextBoxFor(model => model.CustomerName, "", new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.CustomerName, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CustomerContact, new {@class = "control-label"})
+                            @Html.TextBoxFor(model => model.CustomerContact, "", new {@class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.CustomerContact, "", new {@class = "text-danger"})
+                        </div>
+
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td colspan="2" style="background: grey; color: #fff">Sale Summery</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td class="col-md-3">@Html.LabelFor(model => model.TotalAmount, new {@class = "control-label"})</td>
+                                <td>@Html.TextBoxFor(model => model.TotalAmount, "", new {@class = "form-control", id = "totalAmount", @readonly = true})</td>
+                            </tr>
+                            @Html.ValidationMessageFor(model => model.TotalAmount, "", new {@class = "text-danger"})
+
+                            <tr>
+                                <td>@Html.LabelFor(model => model.DiscountAmount, new {@class = "control-label"})</td>
+                                <td>@Html.TextBoxFor(model => model.DiscountAmount, "", new {@class = "form-control ", id = "discountAmount"})</td>
+                            </tr>
+                            @Html.ValidationMessageFor(model => model.DiscountAmount, "", new {@class = "text-danger"})
+
+                            <tr>
+                                <td>@Html.Label("Total (After Discount)", new {@class = "control-label "})</td>
+                                <td>@Html.TextBox("SubTotalAmount", "0", new {@class = "form-control", id = "subTotalAmount", @readonly = true})</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.Label("VAT (%)", new {@class = "control-label"})</td>
+                                <td>@Html.TextBoxFor(model => model.VAT, "", new {@class = "form-control", id = "vat"})</td>
+                            </tr>
+                            @Html.ValidationMessageFor(model => model.VAT, "", new {@class = "text-danger"})
+
+                            <tr>
+                                <td>@Html.LabelFor(model => model.PayableAmount, new {@class = "control-label"})</td>
+                                <td>@Html.TextBoxFor(model => model.PayableAmount, "", new {@class = "form-control", id = "payableAmount", @readonly = true})</td>
+                            </tr>
+                            @Html.ValidationMessageFor(model => model.PayableAmount, "", new {@class = "text-danger"})
+                            <tr>
+                                <td>@Html.LabelFor(model => model.PaidAmount, new {@class = "control-label"})</td>
+                                <td>@Html.TextBoxFor(model => model.PaidAmount, "", new {@class = "form-control", id = "paidAmount"})</td>
+                            </tr>
+                            @Html.ValidationMessageFor(model => model.PaidAmount, "", new {@class = "text-danger"})
+                            <tr>
+                                <td>@Html.LabelFor(model => model.DueAmount, new {@class = "control-label"})</td>
+                                <td>@Html.TextBoxFor(model => model.DueAmount, "", new {@class = "form-control", id = "dueAmount", @readonly = true})</td>
+                            </tr>
+                            @Html.ValidationMessageFor(model => model.DueAmount, "", new {@class = "text-danger"})
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-6">
+                <input type="submit" value="Sale" class="btn btn-primary" />
+            </div>
+        </div>
+        </div>
+}
+
+
+<link href="~/Content/Project/chosen.min.css" rel="stylesheet" />
+
+@section scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+ <script src="~/Scripts/Custom/SalesOperation.js"></script>
+    <script>
+        $(function () {
+
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: '-1M',
+                maxDate: '+1D'
+
+            });
+
+            $(".chosen-select").chosen({
+                allow_single_deselect: true
+            });
+
+        });
+    </script>
+}

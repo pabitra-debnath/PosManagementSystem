@@ -1,0 +1,119 @@
+﻿@model POS.Models.Operation.Purchase
+
+@{
+    ViewBag.Title = "New Purchase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Purchase</h2>
+
+<div class="PurchaseHeader col-md-12">
+    <div class="form-group col-md-4">
+        @Html.Label("ItemId", "Item Name", new { @class = "form-label" })
+        <div class="">
+            @Html.DropDownList("ItemId", null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group col-md-2">
+        @Html.Label("Quantity", "Quantity", new { @class = "form-label" })
+        <div class="">
+            <input class="form-control" name="Quantity" type="number" id="Quantity" value="" />
+        </div>
+    </div>
+    <div class="form-group col-md-2">
+        @Html.Label("Price", "Price", new { @class = "form-label" })
+        <div class="">
+            <input class="form-control" name="Price" type="number" id="Price" value="" />
+        </div>
+    </div>
+    <div class="col-md-3 col-md-offset-4">
+        <button class="btn btn-primary addBtn">Add</button>
+    </div>
+</div>
+
+<form action="/Purchase/NewPurchase" method="post" class="PurchaseForm">
+    @Html.AntiForgeryToken()
+
+    <div class="PurchaseDetails">
+        <div class="PurchaseTable col-md-8">
+            <table class="table table-bordered table-striped table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td>SL</td>
+                        <td>Item</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                        <td>Total Price</td>
+                    </tr>
+                </thead>
+                <tbody class="AddedDataTable">
+                
+                </tbody>
+            </table>
+        </div>
+
+        <div class="PurchaseInfo col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(c => c.OrganizationId, "Organization", new { @class = "form-label" })
+                @Html.DropDownListFor(c => c.OrganizationId, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.OrganizationId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(c => c.BranchId, "Branch", new { @class = "form-label" })
+                @Html.DropDownListFor(c => c.BranchId, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.BranchId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(c => c.EmployeeId, "Employee", new { @class = "form-label" })
+                @Html.DropDownListFor(c => c.EmployeeId, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.EmployeeId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(c => c.PartyId, "Supplier", new { @class = "form-label" })
+                @Html.DropDownListFor(c => c.PartyId, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.PartyId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(c => c.Remarks, "Remarks", new { @class = "form-label" })
+                @Html.TextArea("Remarks", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.Remarks, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(c => c.PurchaseDate, "Date", new { @class = "form-label" })
+                <input type="date" name="PurchaseDate" id="PurchaseDate" class="form-control" />
+                @Html.ValidationMessageFor(c => c.PurchaseDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="PurchaseSummery">
+                <p>---Purchase Summerry---</p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Total Ammount</td>
+                            <td>Due Ammount</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="text" name="TotalAmmount" id="TotalAmmount" disabled="disabled" />
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(c => c.DueAmmount, null, new { @class = "form-control" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary PurchaseBtn" value="Submit" />
+</form>
+
+@section style{
+<link href="~/Content/PurchaseStyle.css" rel="stylesheet" /> 
+}
+@section scripts{
+    <script src="~/Scripts/Custom/Purchase.js"></script>
+}
+
